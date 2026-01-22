@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brandon Tanaka Nyika | Software Engineering</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         /* Import modern fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;600&display=swap');
         
         :root {
             --golden: #FFD700;
-            --golden-glow: rgba(255, 215, 0, 0.8);
-            --red-glow: rgba(255, 69, 0, 0.8);
-            --dark-red: #8B0000;
-            --dark-bg: #0a0a0f;
-            --darker: #050508;
-            --card-bg: #111122;
-            --text: #e0e0ff;
-            --text-dim: #a0a0cc;
+            --golden-glow: rgba(255, 215, 0, 0.9);
+            --red-glow: rgba(255, 50, 50, 0.9);
+            --deep-red: #B22222;
+            --black: #000000;
+            --darkest: #050505;
+            --darker: #0a0a0a;
+            --dark-bg: #0f0f0f;
+            --card-bg: #121212;
+            --text-bright: #ffffff;
+            --text-primary: #f0f0f0;
+            --text-secondary: #d0d0d0;
             --accent: #00ffff;
+            --glow-intensity: 0.8;
         }
         
         * {
@@ -31,60 +34,71 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text);
+            background: var(--black);
+            color: var(--text-primary);
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.7;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(30, 30, 30, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(40, 40, 40, 0.1) 0%, transparent 20%);
         }
         
-        /* Animated background with particles */
-        #particles-js {
+        /* Cosmic background effect */
+        .cosmic-bg {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            z-index: -2;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #000000 50%, #0a0a0a 75%, #000000 100%);
+            opacity: 0.9;
         }
         
-        /* Glowing edges for the page */
+        /* Enhanced glowing edges with high contrast */
         .glow-edge {
             position: fixed;
             pointer-events: none;
             z-index: -1;
+            filter: brightness(1.5);
         }
         
         .glow-top {
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                var(--golden) 20%,
+                var(--golden) 25%,
                 var(--red-glow) 50%,
-                var(--golden) 80%,
+                var(--golden) 75%,
                 transparent 100%);
-            box-shadow: 0 0 25px var(--golden-glow),
-                        0 0 50px var(--red-glow);
+            box-shadow: 
+                0 0 30px var(--golden-glow),
+                0 0 60px var(--red-glow),
+                0 0 90px rgba(255, 50, 50, 0.5);
             animation: glow-pulse 3s ease-in-out infinite;
         }
         
         .glow-right {
             top: 0;
             right: 0;
-            width: 3px;
+            width: 4px;
             height: 100%;
             background: linear-gradient(180deg, 
                 transparent 0%, 
-                var(--red-glow) 20%,
+                var(--red-glow) 25%,
                 var(--golden) 50%,
-                var(--red-glow) 80%,
+                var(--red-glow) 75%,
                 transparent 100%);
-            box-shadow: -10px 0 25px var(--red-glow),
-                        -20px 0 50px var(--golden-glow);
+            box-shadow: 
+                -10px 0 30px var(--red-glow),
+                -20px 0 60px var(--golden-glow),
+                -30px 0 90px rgba(255, 215, 0, 0.5);
             animation: glow-pulse 4s ease-in-out infinite reverse;
         }
         
@@ -92,90 +106,144 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                var(--golden) 20%,
+                var(--golden) 25%,
                 var(--red-glow) 50%,
-                var(--golden) 80%,
+                var(--golden) 75%,
                 transparent 100%);
-            box-shadow: 0 0 25px var(--golden-glow),
-                        0 0 50px var(--red-glow);
+            box-shadow: 
+                0 0 30px var(--golden-glow),
+                0 0 60px var(--red-glow),
+                0 0 90px rgba(255, 50, 50, 0.5);
             animation: glow-pulse 3.5s ease-in-out infinite;
         }
         
         .glow-left {
             top: 0;
             left: 0;
-            width: 3px;
+            width: 4px;
             height: 100%;
             background: linear-gradient(180deg, 
                 transparent 0%, 
-                var(--red-glow) 20%,
+                var(--red-glow) 25%,
                 var(--golden) 50%,
-                var(--red-glow) 80%,
+                var(--red-glow) 75%,
                 transparent 100%);
-            box-shadow: 10px 0 25px var(--red-glow),
-                        20px 0 50px var(--golden-glow);
+            box-shadow: 
+                10px 0 30px var(--red-glow),
+                20px 0 60px var(--golden-glow),
+                30px 0 90px rgba(255, 215, 0, 0.5);
             animation: glow-pulse 4.5s ease-in-out infinite reverse;
         }
         
-        /* Container styling */
+        /* Main container with high contrast */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 50px 20px;
             position: relative;
         }
         
-        /* Header/Logo styling */
+        /* Ultra-dark header */
+        header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.95);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.1),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Enhanced logo with sharp contrast */
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            background: linear-gradient(45deg, var(--golden), var(--dark-red), var(--golden));
+            background: linear-gradient(45deg, 
+                var(--golden) 0%, 
+                #ff8c00 25%,
+                var(--deep-red) 50%,
+                #ff4500 75%,
+                var(--golden) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-            margin-bottom: 10px;
-            text-align: center;
+            text-shadow: 
+                0 0 40px rgba(255, 215, 0, 0.5),
+                0 0 80px rgba(255, 69, 0, 0.3);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
         
+        /* High contrast tagline */
         .tagline {
             font-family: 'JetBrains Mono', monospace;
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            letter-spacing: 1.5px;
+            color: var(--text-bright);
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
         }
         
-        /* Section styling with glowing borders */
+        /* Contact info with high visibility */
+        .contact-highlight {
+            display: inline-block;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 12px;
+            border: 2px solid var(--golden);
+            box-shadow: 
+                0 0 25px var(--golden-glow),
+                inset 0 0 15px rgba(255, 215, 0, 0.1);
+            margin: 30px 0;
+        }
+        
+        .contact-highlight p {
+            margin: 12px 0;
+            color: var(--text-bright);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Ultra-dark sections with glowing borders */
         section {
-            background: rgba(17, 17, 34, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 40px;
-            margin: 50px 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 18px;
+            padding: 50px;
+            margin: 70px 0;
             position: relative;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(0, 0, 0, 0.7);
+            transition: all 0.4s ease;
         }
         
         section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.7),
+                0 0 50px rgba(255, 215, 0, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.7);
+            border-color: var(--golden);
         }
         
+        /* Enhanced section glow effect */
         section::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 17px;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 21px;
             background: linear-gradient(45deg, 
                 var(--golden), 
                 var(--red-glow), 
@@ -183,54 +251,74 @@
                 var(--red-glow), 
                 var(--golden));
             z-index: -1;
-            filter: blur(10px);
-            opacity: 0.7;
-            animation: section-glow 6s linear infinite;
+            filter: blur(15px);
+            opacity: 0.5;
+            animation: section-glow 8s linear infinite;
         }
         
-        /* Section headings */
+        /* High contrast section headings */
         h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: var(--golden);
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            font-size: 2.3rem;
+            color: var(--text-bright);
+            margin-bottom: 35px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--golden);
             position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: 700;
         }
         
         h2::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -3px;
             left: 0;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--golden), var(--red-glow));
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--golden), var(--red-glow), var(--golden));
+            box-shadow: 0 0 20px var(--golden-glow);
         }
         
-        /* Projects grid */
+        /* High contrast text paragraphs */
+        section p {
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            font-weight: 400;
+        }
+        
+        /* Enhanced project cards */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
         }
         
         .project-card {
-            background: rgba(25, 25, 45, 0.9);
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #0a0a0a, #111111);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.5),
+                inset 0 0 10px rgba(0, 0, 0, 0.7);
         }
         
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-12px) scale(1.02);
             border-color: var(--golden);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(255, 215, 0, 0.3),
+                0 0 60px rgba(255, 69, 0, 0.2),
+                inset 0 0 10px rgba(0, 0, 0, 0.7);
         }
         
         .project-card::before {
@@ -238,120 +326,162 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 6px;
             height: 100%;
-            background: linear-gradient(180deg, var(--golden), var(--red-glow));
+            background: linear-gradient(180deg, var(--golden), var(--red-glow), var(--golden));
+            box-shadow: 0 0 20px var(--golden-glow);
         }
         
         .project-card h3 {
-            color: var(--golden);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .project-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            position: relative;
-        }
-        
-        .project-link::after {
-            content: '→';
-            margin-left: 5px;
-            transition: transform 0.3s;
-        }
-        
-        .project-link:hover::after {
-            transform: translateX(5px);
-        }
-        
-        /* Contact section */
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 20px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 25px;
-            background: rgba(255, 215, 0, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            transition: all 0.3s;
-        }
-        
-        .contact-item:hover {
-            background: rgba(255, 215, 0, 0.1);
-            border-color: var(--golden);
-            transform: translateX(5px);
-        }
-        
-        .contact-icon {
+            color: var(--text-bright);
             font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        /* Enhanced skill tags */
+        .skill-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 69, 0, 0.15));
+            color: var(--text-bright);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 69, 0, 0.3));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* High contrast contact section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .contact-card {
+            background: linear-gradient(145deg, #0a0a0a, #111111);
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .contact-card:hover {
+            background: linear-gradient(145deg, #111111, #0a0a0a);
+            border-color: var(--golden);
+            transform: translateY(-8px);
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.7),
+                0 0 30px rgba(255, 215, 0, 0.2);
+        }
+        
+        .contact-card i {
+            font-size: 2.5rem;
             color: var(--golden);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--golden-glow);
         }
         
-        /* Floating particles container */
-        .floating-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+        .contact-card h3 {
+            color: var(--text-bright);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
         }
         
-        /* Floating particle */
+        /* Enhanced footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid var(--golden);
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 -5px 30px rgba(255, 215, 0, 0.1);
+        }
+        
+        footer p {
+            color: var(--text-bright);
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        
+        .signature {
+            color: var(--golden);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Floating particles with enhanced glow */
         .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
+            position: fixed;
+            pointer-events: none;
+            z-index: -2;
             border-radius: 50%;
             background: var(--golden);
-            box-shadow: 0 0 10px var(--golden-glow);
-            animation: float 15s infinite linear;
+            box-shadow: 
+                0 0 20px var(--golden-glow),
+                0 0 40px var(--golden-glow);
+            animation: float 25s infinite linear;
         }
         
         .particle.red {
             background: var(--red-glow);
-            box-shadow: 0 0 10px var(--red-glow);
+            box-shadow: 
+                0 0 20px var(--red-glow),
+                0 0 40px var(--red-glow);
         }
         
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 215, 0, 0.1);
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-        
-        /* Animations */
+        /* Enhanced animations */
         @keyframes glow-pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+            0%, 100% { 
+                opacity: 0.8;
+                filter: brightness(1.2);
+            }
+            50% { 
+                opacity: 1;
+                filter: brightness(1.5);
+            }
         }
         
         @keyframes section-glow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { 
+                background-position: 0% 50%;
+                opacity: 0.4;
+            }
+            50% { 
+                background-position: 100% 50%;
+                opacity: 0.7;
+            }
+            100% { 
+                background-position: 0% 50%;
+                opacity: 0.4;
+            }
         }
         
         @keyframes float {
             0% {
-                transform: translateY(100vh) translateX(0);
+                transform: translateY(100vh) translateX(-100px) scale(0.5);
                 opacity: 0;
             }
             10% {
@@ -361,9 +491,30 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100px) translateX(100px);
+                transform: translateY(-100px) translateX(100px) scale(1.5);
                 opacity: 0;
             }
+        }
+        
+        /* High contrast scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--black);
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--golden), var(--deep-red));
+            border-radius: 6px;
+            border: 2px solid var(--black);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--golden-glow), var(--red-glow));
         }
         
         /* Responsive design */
@@ -373,11 +524,12 @@
             }
             
             section {
-                padding: 25px;
+                padding: 30px 20px;
+                margin: 40px 0;
             }
             
             .logo {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .projects-grid {
@@ -385,171 +537,177 @@
             }
             
             .contact-info {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Glowing page edges -->
+    <!-- Cosmic background -->
+    <div class="cosmic-bg"></div>
+    
+    <!-- Enhanced glowing edges -->
     <div class="glow-edge glow-top"></div>
     <div class="glow-edge glow-right"></div>
     <div class="glow-edge glow-bottom"></div>
     <div class="glow-edge glow-left"></div>
     
-    <!-- Particles background -->
-    <div id="particles-js"></div>
-    
-    <!-- Floating particles -->
-    <div class="floating-particles" id="floating-particles"></div>
-    
     <div class="container">
-        <!-- Header -->
+        <!-- Enhanced Header -->
         <header>
             <h1 class="logo">BRANDON TANAKA NYIKA</h1>
-            <p class="tagline">SOFTWARE ENGINEERING STUDENT | SYSTEMS ARCHITECT | CYBERSECURITY ASPIRANT</p>
+            <p class="tagline">SOFTWARE ENGINEER | SYSTEMS ARCHITECT | CYBERSECURITY ASPIRANT</p>
             
-            <div style="text-align: center; margin: 30px 0;">
-                <div style="display: inline-block; padding: 15px 30px; background: rgba(255, 215, 0, 0.1); border-radius: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
-                    <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: var(--golden); margin-right: 10px;"></i> Zimbabwe</p>
-                    <p style="margin: 5px 0;"><i class="fas fa-envelope" style="color: var(--golden); margin-right: 10px;"></i> brandonworld924@gmail.com</p>
-                </div>
+            <div class="contact-highlight">
+                <p><i class="fas fa-map-marker-alt" style="color: var(--golden); margin-right: 15px;"></i> Zimbabwe</p>
+                <p><i class="fas fa-envelope" style="color: var(--golden); margin-right: 15px;"></i> brandonworld924@gmail.com</p>
+                <p><i class="fas fa-graduation-cap" style="color: var(--golden); margin-right: 15px;"></i> BSc Software Engineering</p>
             </div>
         </header>
         
         <!-- Projects Section -->
         <section id="projects">
-            <h2><i class="fas fa-code" style="margin-right: 15px;"></i>MY PROJECTS</h2>
+            <h2><i class="fas fa-code" style="margin-right: 20px; color: var(--golden);"></i>PROJECT PORTFOLIO</h2>
+            <p style="color: var(--text-bright); font-size: 1.2rem; margin-bottom: 30px;">
+                A showcase of my technical projects and systems engineering work.
+            </p>
+            
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>ThinkPad Optimizer Suite</h3>
-                    <p>A collection of Bash scripts to optimize Linux performance on ThinkPad laptops. Features TLP configuration, power management, and system tuning for maximum efficiency.</p>
-                    <div style="margin: 15px 0;">
-                        <span style="background: rgba(255, 69, 0, 0.2); color: #ff8c00; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;">Bash</span>
-                        <span style="background: rgba(255, 215, 0, 0.2); color: var(--golden); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;">Linux</span>
-                        <span style="background: rgba(0, 255, 255, 0.2); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem;">Systemd</span>
+                    <h3>ThinkPad Optimization Suite</h3>
+                    <p>Advanced Bash scripting suite for Linux optimization on ThinkPad hardware. Features include TLP configuration, power management, thermal control, and performance tuning for maximum efficiency and battery life.</p>
+                    <div style="margin: 20px 0;">
+                        <span class="skill-tag">Bash Scripting</span>
+                        <span class="skill-tag">Linux System Admin</span>
+                        <span class="skill-tag">Performance Tuning</span>
                     </div>
-                    <a href="https://github.com/WRLD-BTN" class="project-link">View on GitHub</a>
+                    <a href="https://github.com/WRLD-BTN" style="color: var(--golden); text-decoration: none; font-weight: 600;">
+                        View on GitHub <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </a>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Portfolio Architecture</h3>
-                    <p>This responsive portfolio website built with pure HTML/CSS/JS. Features glowing animations, particle effects, and a modern dark theme with golden/red accents.</p>
-                    <div style="margin: 15px 0;">
-                        <span style="background: rgba(255, 69, 0, 0.2); color: #ff8c00; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;">HTML5</span>
-                        <span style="background: rgba(255, 215, 0, 0.2); color: var(--golden); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;">CSS3</span>
-                        <span style="background: rgba(0, 255, 255, 0.2); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem;">JavaScript</span>
+                    <h3>Dark Theme Architecture</h3>
+                    <p>This ultra-dark themed portfolio built with pure HTML/CSS/JS. Features high-contrast text, glowing animations, particle systems, and responsive design optimized for readability and visual impact.</p>
+                    <div style="margin: 20px 0;">
+                        <span class="skill-tag">HTML5/CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">UI/UX Design</span>
                     </div>
-                    <a href="https://github.com/WRLD-BTN" class="project-link">View Source</a>
+                    <a href="https://github.com/WRLD-BTN" style="color: var(--golden); text-decoration: none; font-weight: 600;">
+                        View Source <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </a>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Secure Systems Design</h3>
-                    <p>Research project on scalable backend architectures with security-first principles. Exploring encryption, authentication systems, and defensive programming patterns.</p>
-                    <div style="margin: 15px 0;">
-                        <span style="background: rgba(255, 69, 0, 0.2); color: #ff8c00; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;">Python</span>
-                        <span style="background: rgba(255, 215, 0, 0.2); color: var(--golden); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px;">Docker</span>
-                        <span style="background: rgba(0, 255, 255, 0.2); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem;">Security</span>
+                    <h3>Security-First Systems Design</h3>
+                    <p>Research and implementation of scalable backend architectures with embedded security principles. Focus on encryption protocols, authentication systems, and defensive programming patterns for resilient systems.</p>
+                    <div style="margin: 20px 0;">
+                        <span class="skill-tag">Systems Design</span>
+                        <span class="skill-tag">Cybersecurity</span>
+                        <span class="skill-tag">Backend Architecture</span>
                     </div>
-                    <a href="https://github.com/WRLD-BTN" class="project-link">View Case Study</a>
+                    <a href="https://github.com/WRLD-BTN" style="color: var(--golden); text-decoration: none; font-weight: 600;">
+                        View Research <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                    </a>
                 </div>
             </div>
         </section>
         
         <!-- About Section -->
         <section id="about">
-            <h2><i class="fas fa-user" style="margin-right: 15px;"></i>ABOUT ME</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 25px;">
+            <h2><i class="fas fa-user" style="margin-right: 20px; color: var(--golden);"></i>ABOUT ME</h2>
+            
+            <p style="font-size: 1.2rem; margin-bottom: 25px; color: var(--text-bright);">
                 I'm a passionate software engineering student pursuing my Bachelor's degree, driven by the incredible potential of code to build and transform. My current focus is diving deep into systems design and backend development, actively learning how to craft scalable, resilient architectures.
             </p>
-            <p style="font-size: 1.1rem; margin-bottom: 25px;">
+            
+            <p style="font-size: 1.2rem; margin-bottom: 25px; color: var(--text-bright);">
                 I thrive on the process of solving complex problems, whether it's through a beautifully efficient algorithm or a well-structured database schema. While I love building robust systems, I'm equally fascinated by how they can be fortified and challenged.
             </p>
-            <p style="font-size: 1.1rem;">
+            
+            <p style="font-size: 1.2rem; color: var(--text-bright);">
                 This curiosity fuels my ambition to eventually venture into the dynamic world of cybersecurity, aiming to become an engineer who doesn't just create, but also expertly defends.
             </p>
             
-            <h3 style="color: var(--golden); margin: 30px 0 15px 0; font-family: 'Orbitron', sans-serif;">TECHNICAL SKILLS</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;">
-                <span style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.2)); color: var(--golden); padding: 8px 16px; border-radius: 8px; font-weight: 600;">Systems Design</span>
-                <span style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.2)); color: var(--golden); padding: 8px 16px; border-radius: 8px; font-weight: 600;">Backend Development</span>
-                <span style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.2)); color: var(--golden); padding: 8px 16px; border-radius: 8px; font-weight: 600;">Linux Administration</span>
-                <span style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.2)); color: var(--golden); padding: 8px 16px; border-radius: 8px; font-weight: 600;">Bash Scripting</span>
-                <span style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.2)); color: var(--golden); padding: 8px 16px; border-radius: 8px; font-weight: 600;">Cybersecurity Principles</span>
-                <span style="background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 69, 0, 0.2)); color: var(--golden); padding: 8px 16px; border-radius: 8px; font-weight: 600;">Database Design</span>
+            <h3 style="color: var(--text-bright); margin: 40px 0 20px 0; font-family: 'Orbitron', sans-serif; font-size: 1.8rem;">
+                <i class="fas fa-cogs" style="color: var(--golden); margin-right: 15px;"></i>TECHNICAL EXPERTISE
+            </h3>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span class="skill-tag">Systems Architecture</span>
+                <span class="skill-tag">Backend Development</span>
+                <span class="skill-tag">Linux Administration</span>
+                <span class="skill-tag">Bash/PowerShell</span>
+                <span class="skill-tag">Cybersecurity Principles</span>
+                <span class="skill-tag">Database Design</span>
+                <span class="skill-tag">Network Security</span>
+                <span class="skill-tag">API Development</span>
+                <span class="skill-tag">Containerization</span>
+                <span class="skill-tag">Performance Optimization</span>
             </div>
         </section>
         
         <!-- Contact Section -->
         <section id="contact">
-            <h2><i class="fas fa-envelope" style="margin-right: 15px;"></i>CONTACT</h2>
-            <p style="margin-bottom: 30px; font-size: 1.1rem;">I'm always open to discussing new opportunities, collaborations, and interesting projects in software engineering and cybersecurity.</p>
+            <h2><i class="fas fa-envelope" style="margin-right: 20px; color: var(--golden);"></i>CONTACT & CONNECT</h2>
+            
+            <p style="font-size: 1.2rem; margin-bottom: 40px; color: var(--text-bright);">
+                I'm always open to discussing new opportunities, collaborations, and interesting projects in software engineering, systems design, and cybersecurity.
+            </p>
             
             <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--golden); margin-bottom: 5px;">Email</h3>
-                        <p>brandonworld924@gmail.com</p>
-                    </div>
+                <a href="mailto:brandonworld924@gmail.com" class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Primary Email</h3>
+                    <p>brandonworld924@gmail.com</p>
+                </a>
+                
+                <a href="https://github.com/WRLD-BTN" class="contact-card" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub Profile</h3>
+                    <p>github.com/WRLD-BTN</p>
+                </a>
+                
+                <div class="contact-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Education</h3>
+                    <p>BSc Software Engineering</p>
                 </div>
                 
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--golden); margin-bottom: 5px;">GitHub</h3>
-                        <p>github.com/WRLD-BTN</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--golden); margin-bottom: 5px;">Education</h3>
-                        <p>Bachelor's in Software Engineering</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div>
-                        <h3 style="color: var(--golden); margin-bottom: 5px;">Location</h3>
-                        <p>Zimbabwe</p>
-                    </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>Zimbabwe</p>
                 </div>
             </div>
         </section>
         
-        <!-- Footer -->
+        <!-- Enhanced Footer -->
         <footer>
-            <p>© 2026 Brandon Tanaka Nyika. All rights reserved.</p>
-            <p style="margin-top: 10px; color: rgba(255, 215, 0, 0.6); font-size: 0.8rem;">
-                <i class="fas fa-code" style="margin-right: 5px;"></i>Built with passion for systems and security
+            <p>© 2026 BRANDON TANAKA NYIKA</p>
+            <p class="signature">
+                <i class="fas fa-code" style="margin-right: 10px;"></i>
+                ENGINEERING EXCELLENCE THROUGH SECURE SYSTEMS DESIGN
+            </p>
+            <p style="margin-top: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+                This site features an ultra-dark theme with high contrast text and glowing golden/red effects
             </p>
         </footer>
     </div>
     
-    <!-- JavaScript for floating particles -->
+    <!-- JavaScript for enhanced particles and effects -->
     <script>
-        // Create floating particles
-        function createParticles() {
-            const container = document.getElementById('floating-particles');
-            const particleCount = 30;
+        // Create enhanced floating particles
+        function createEnhancedParticles() {
+            const particleCount = 40;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Alternate between golden and red particles
-                if (i % 2 === 0) {
+                // Alternate colors
+                if (i % 3 === 0) {
                     particle.classList.add('red');
                 }
                 
@@ -557,44 +715,106 @@
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
                 
-                // Random size
-                const size = Math.random() * 4 + 2;
+                // Random size with enhanced glow
+                const size = Math.random() * 6 + 3;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 
-                // Random animation duration and delay
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
+                // Enhanced glow based on size
+                if (size > 6) {
+                    particle.style.boxShadow = 
+                        `0 0 ${size*5}px var(--golden-glow), 
+                         0 0 ${size*10}px var(--golden-glow)`;
+                }
+                
+                // Random animation
+                const duration = Math.random() * 30 + 15;
+                const delay = Math.random() * 10;
                 particle.style.animationDuration = duration + 's';
                 particle.style.animationDelay = delay + 's';
                 
-                container.appendChild(particle);
+                // Random movement direction
+                const xStart = Math.random() * 200 - 100;
+                const xEnd = Math.random() * 200 - 100;
+                
+                const keyframes = `
+                    @keyframes float-${i} {
+                        0% {
+                            transform: translateY(100vh) translateX(${xStart}px) scale(0.5);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: ${Math.random() * 0.8 + 0.2};
+                        }
+                        90% {
+                            opacity: ${Math.random() * 0.8 + 0.2};
+                        }
+                        100% {
+                            transform: translateY(-100px) translateX(${xEnd}px) scale(1.5);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = keyframes;
+                document.head.appendChild(style);
+                
+                particle.style.animationName = `float-${i}`;
+                document.body.appendChild(particle);
             }
         }
         
-        // Initialize particles when page loads
-        document.addEventListener('DOMContentLoaded', createParticles);
-        
-        // Add hover effect to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 10px 30px rgba(255, 215, 0, 0.3), 0 0 50px rgba(255, 69, 0, 0.2)';
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createEnhancedParticles();
+            
+            // Enhanced hover effects
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = 
+                        '0 20px 50px rgba(0, 0, 0, 0.8), ' +
+                        '0 0 60px rgba(255, 215, 0, 0.4), ' +
+                        '0 0 80px rgba(255, 69, 0, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = 
+                        '0 5px 15px rgba(0, 0, 0, 0.5), ' +
+                        'inset 0 0 10px rgba(0, 0, 0, 0.7)';
+                });
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.boxShadow = '0 10px 25px rgba(255, 215, 0, 0.2)';
+            // Pulsing effect for edges
+            setInterval(() => {
+                const edges = document.querySelectorAll('.glow-edge');
+                edges.forEach(edge => {
+                    edge.style.filter = `brightness(${1.2 + Math.random() * 0.6})`;
+                });
+            }, 2000);
+            
+            // Section entrance animation
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 300 + index * 200);
             });
         });
         
-        // Add glowing effect to contact items on hover
-        document.querySelectorAll('.contact-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.3)';
-            });
+        // Add scroll effect for glow intensity
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = scrolled / maxScroll;
             
-            item.addEventListener('mouseleave', function() {
-                this.style.boxShadow = 'none';
-            });
+            const glowIntensity = 0.7 + scrollPercent * 0.3;
+            document.documentElement.style.setProperty('--glow-intensity', glowIntensity);
         });
     </script>
 </body>
