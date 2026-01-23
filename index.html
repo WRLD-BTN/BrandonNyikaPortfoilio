@@ -146,9 +146,92 @@
             position: relative;
         }
         
+        /* Header with photo layout */
+        .header-with-photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* Photo container */
+        .photo-container {
+            flex: 0 0 200px;
+        }
+        
+        /* Circular photo with glowing effects */
+        .circular-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, var(--golden), var(--deep-red), var(--golden)) border-box;
+            box-shadow: 
+                0 0 40px var(--golden-glow),
+                0 0 80px rgba(255, 215, 0, 0.4),
+                0 0 120px rgba(255, 69, 0, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.8);
+            animation: photo-glow 3s ease-in-out infinite;
+        }
+        
+        .circular-photo::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border-radius: 50%;
+            background: var(--black);
+            z-index: 1;
+        }
+        
+        .circular-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+            filter: brightness(110%) contrast(105%);
+        }
+        
+        .circular-photo:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Photo glow animation */
+        @keyframes photo-glow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px var(--golden-glow),
+                    0 0 60px rgba(255, 215, 0, 0.4),
+                    0 0 90px rgba(255, 69, 0, 0.2),
+                    inset 0 0 30px rgba(0, 0, 0, 0.8);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 50px var(--golden-glow),
+                    0 0 100px rgba(255, 215, 0, 0.5),
+                    0 0 150px rgba(255, 69, 0, 0.4),
+                    inset 0 0 30px rgba(0, 0, 0, 0.8);
+            }
+        }
+        
+        /* Text content */
+        .header-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        
         /* Ultra-dark header */
         header {
-            text-align: center;
             padding: 60px 0;
             background: rgba(0, 0, 0, 0.95);
             border-radius: 15px;
@@ -528,8 +611,23 @@
                 margin: 40px 0;
             }
             
+            .header-with-photo {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
             .logo {
                 font-size: 2.2rem;
+            }
+            
+            .circular-photo {
+                width: 180px;
+                height: 180px;
             }
             
             .projects-grid {
@@ -538,6 +636,21 @@
             
             .contact-info {
                 grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .circular-photo {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
@@ -553,15 +666,28 @@
     <div class="glow-edge glow-left"></div>
     
     <div class="container">
-        <!-- Enhanced Header -->
+        <!-- Enhanced Header with Photo -->
         <header>
-            <h1 class="logo">BRANDON TANAKA NYIKA</h1>
-            <p class="tagline">SOFTWARE ENGINEER | SYSTEMS ARCHITECT | CYBERSECURITY ASPIRANT</p>
-            
-            <div class="contact-highlight">
-                <p><i class="fas fa-map-marker-alt" style="color: var(--golden); margin-right: 15px;"></i> Zimbabwe</p>
-                <p><i class="fas fa-envelope" style="color: var(--golden); margin-right: 15px;"></i> brandonworld924@gmail.com</p>
-                <p><i class="fas fa-graduation-cap" style="color: var(--golden); margin-right: 15px;"></i> BSc Software Engineering</p>
+            <div class="header-with-photo">
+                <!-- Circular Photo -->
+                <div class="photo-container">
+                    <div class="circular-photo">
+                        <img src="brandon.png" 
+                             alt="Brandon Tanaka Nyika - Software Engineering Student">
+                    </div>
+                </div>
+                
+                <!-- Text Content -->
+                <div class="header-text">
+                    <h1 class="logo">BRANDON TANAKA NYIKA</h1>
+                    <p class="tagline">SOFTWARE ENGINEER | SYSTEMS ARCHITECT | CYBERSECURITY ASPIRANT</p>
+                    
+                    <div class="contact-highlight">
+                        <p><i class="fas fa-map-marker-alt" style="color: var(--golden); margin-right: 15px;"></i> Zimbabwe</p>
+                        <p><i class="fas fa-envelope" style="color: var(--golden); margin-right: 15px;"></i> brandonworld924@gmail.com</p>
+                        <p><i class="fas fa-graduation-cap" style="color: var(--golden); margin-right: 15px;"></i> BSc Software Engineering</p>
+                    </div>
+                </div>
             </div>
         </header>
         
@@ -785,37 +911,5 @@
                 });
             });
             
-            // Pulsing effect for edges
-            setInterval(() => {
-                const edges = document.querySelectorAll('.glow-edge');
-                edges.forEach(edge => {
-                    edge.style.filter = `brightness(${1.2 + Math.random() * 0.6})`;
-                });
-            }, 2000);
-            
-            // Section entrance animation
-            const sections = document.querySelectorAll('section');
-            sections.forEach((section, index) => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }, 300 + index * 200);
-            });
-        });
-        
-        // Add scroll effect for glow intensity
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = scrolled / maxScroll;
-            
-            const glowIntensity = 0.7 + scrollPercent * 0.3;
-            document.documentElement.style.setProperty('--glow-intensity', glowIntensity);
-        });
-    </script>
-</body>
-</html>
+            // Photo hover effect
+            const photo = document.querySelector('.circular-photo
