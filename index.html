@@ -162,7 +162,7 @@
             flex: 0 0 200px;
         }
         
-        /* Circular photo with glowing effects */
+        /* Circular photo with glowing effects - ADJUSTED FOR BETTER POSITIONING */
         .circular-photo {
             width: 200px;
             height: 200px;
@@ -191,18 +191,21 @@
             z-index: 1;
         }
         
+        /* KEY ADJUSTMENT: Image now shows more of the top content */
         .circular-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 35%; /* Changed from default 50% to 35% to show more top */
             position: relative;
             z-index: 2;
             transition: transform 0.5s ease;
             filter: brightness(110%) contrast(105%);
+            transform: translateY(-5px); /* Slight upward shift */
         }
         
         .circular-photo:hover img {
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-5px); /* Adjusted hover effect */
         }
         
         /* Photo glow animation */
@@ -905,11 +908,3 @@
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    this.style.boxShadow = 
-                        '0 5px 15px rgba(0, 0, 0, 0.5), ' +
-                        'inset 0 0 10px rgba(0, 0, 0, 0.7)';
-                });
-            });
-            
-            // Photo hover effect
-            const photo = document.querySelector('.circular-photo
